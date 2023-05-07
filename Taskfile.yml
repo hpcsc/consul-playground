@@ -11,3 +11,11 @@ tasks:
   list-peers:
     cmds:
       - consul operator raft list-peers --http-addr {{.CONSUL_HTTP_ADDR}}
+
+  create-tls-certs:
+    dir: ./certs
+    cmds:
+      - test -f ./consul-agent-ca-key.pem && echo 'ca cert exists, skip creation' || consul tls ca create
+      - test -f ./dc1-server-consul-0-key.pem && echo 'server-1 cert exists, skip creation' || consul tls cert create -server -dc=dc1 -ca=./consul-agent-ca.pem
+      - test -f ./dc1-server-consul-1-key.pem && echo 'server-2 cert exists, skip creation' || consul tls cert create -server -dc=dc1 -ca=./consul-agent-ca.pem
+      - test -f ./dc1-server-consul-2-key.pem && echo 'server-3 cert exists, skip creation' || consul tls cert create -server -dc=dc1 -ca=./consul-agent-ca.pem
