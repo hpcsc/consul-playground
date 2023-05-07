@@ -1,0 +1,13 @@
+version: '3'
+
+vars:
+  CONSUL_HTTP_ADDR: http://localhost:18500
+
+tasks:
+  list-members:
+    cmds:
+      - consul members --http-addr {{.CONSUL_HTTP_ADDR}}
+
+  list-peers:
+    cmds:
+      - consul operator raft list-peers --http-addr {{.CONSUL_HTTP_ADDR}}

@@ -1,0 +1,62 @@
+version: "3"
+services:
+  server-1:
+    image: consul:${CONSUL_VERSION}
+    ports:
+      - "18500:8500"
+      - "18600:8600/udp"
+    volumes:
+      - ./configs/server.hcl:/etc/consul.d/config.hcl
+    command:
+      - agent
+      - -config-dir=/etc/consul.d/
+      - -ui
+
+  server-2:
+    image: consul:${CONSUL_VERSION}
+    ports:
+      - "28500:8500"
+      - "28600:8600/udp"
+    volumes:
+      - ./configs/server.hcl:/etc/consul.d/config.hcl
+    command:
+      - agent
+      - -config-dir=/etc/consul.d/
+
+  server-3:
+    image: consul:${CONSUL_VERSION}
+    ports:
+      - "38500:8500"
+      - "38600:8600/udp"
+    volumes:
+      - ./configs/server.hcl:/etc/consul.d/config.hcl
+    command:
+      - agent
+      - -config-dir=/etc/consul.d/
+
+  client-1:
+    image: consul:${CONSUL_VERSION}
+    volumes:
+      - ./configs/client.hcl:/etc/consul.d/config.hcl
+    command:
+      - agent
+      - -node=client-1
+      - -config-dir=/etc/consul.d/
+
+  client-2:
+    image: consul:${CONSUL_VERSION}
+    volumes:
+      - ./configs/client.hcl:/etc/consul.d/config.hcl
+    command:
+      - agent
+      - -node=client-2
+      - -config-dir=/etc/consul.d/
+
+  client-3:
+    image: consul:${CONSUL_VERSION}
+    volumes:
+      - ./configs/client.hcl:/etc/consul.d/config.hcl
+    command:
+      - agent
+      - -node=client-3
+      - -config-dir=/etc/consul.d/
