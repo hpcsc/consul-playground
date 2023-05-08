@@ -48,6 +48,7 @@ services:
     volumes:
       - ./configs/client.hcl:/etc/consul.d/config.hcl
       - ./certs/consul-agent-ca.pem:/etc/consul.d/consul-agent-ca.pem
+      - ./service-definitions/service-1.hcl:/etc/consul.d/service.hcl
     command:
       - agent
       - -node=client-1
@@ -58,6 +59,7 @@ services:
     volumes:
       - ./configs/client.hcl:/etc/consul.d/config.hcl
       - ./certs/consul-agent-ca.pem:/etc/consul.d/consul-agent-ca.pem
+      - ./service-definitions/service-2.hcl:/etc/consul.d/service.hcl
     command:
       - agent
       - -node=client-2
@@ -68,6 +70,7 @@ services:
     volumes:
       - ./configs/client.hcl:/etc/consul.d/config.hcl
       - ./certs/consul-agent-ca.pem:/etc/consul.d/consul-agent-ca.pem
+      - ./service-definitions/service-3.hcl:/etc/consul.d/service.hcl
     command:
       - agent
       - -node=client-3

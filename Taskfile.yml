@@ -12,6 +12,10 @@ tasks:
     cmds:
       - consul operator raft list-peers --http-addr {{.CONSUL_HTTP_ADDR}}
 
+  list-catalog-services:
+    cmds:
+      - consul catalog services --http-addr {{.CONSUL_HTTP_ADDR}}
+
   create-tls-certs:
     dir: ./certs
     cmds:
